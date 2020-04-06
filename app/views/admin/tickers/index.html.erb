@@ -1,0 +1,11 @@
+<div class="text-center">
+    <%= form_for [:admin, @ticker], method: :patch, html:{class: 'form-signin'} do |f| %>
+      <h1 class="h3 mb-3 font-weight-normal">Edit <%= @ticker.pair %> rate</h1>
+      <%= f.label :price %>
+      <%= f.text_field :price, class: 'form-control', autofocus: true %>
+      <%= f.label :fixed_until %>
+      <%= f.text_field :fixed_until, class: 'form-control' %>
+
+      <%= f.submit 'Save', class: 'btn btn-lg btn-primary btn-block' %>
+    <% end %>
+</div>

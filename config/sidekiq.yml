@@ -1,0 +1,4 @@
+:schedule:
+  rates:
+    cron: '0 * * * * *'
+    class: FetchRateJob

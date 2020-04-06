@@ -1,0 +1,7 @@
+<% if @ticker %>
+
+  <h1 class="cover-heading" id="rate"><%= @ticker.price %></h1>
+  <h2 class="cover-heading" ><%= @ticker.pair %></h2>
+<% else %>
+  <h1 class="cover-heading">No rate</h1>
+<% end %>
