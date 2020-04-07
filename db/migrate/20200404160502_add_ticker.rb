@@ -1,4 +1,4 @@
-class Ticker < ActiveRecord::Migration[6.0]
+class AddTicker < ActiveRecord::Migration[6.0]
   def change
     create_table :tickers do |t|
       t.string :base_currency
