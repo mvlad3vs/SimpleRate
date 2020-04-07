@@ -9,7 +9,7 @@ RSpec.describe Ticker, type: :model do
     expect(ticker.price).to eq(Money.new(100_00, 'RUB'))
   end
 
-  it 'accept only possitive values' do
+  it 'accept only positive values' do
     ticker.update price: -100
     expect(ticker.errors[:price]).to include("must be greater than or equal to 0")
   end
