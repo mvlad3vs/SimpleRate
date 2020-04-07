@@ -5,7 +5,7 @@ class Ticker < ApplicationRecord
                greater_than_or_equal_to: 0
            }
 
-  validate :price_not_fixed, if: :fixed_until
+  validate :price_not_fixed, if: :fixed_until_was
   before_save :broadcast_changes, if: :price_cents_changed?
 
   def pair
@@ -16,7 +16,7 @@ class Ticker < ApplicationRecord
   private
 
   def price_not_fixed
-    if fixed_until and fixed_until > Time.current
+    if fixed_until > Time.current
       self.price_cents = price_cents_was
       errors.add :price, :invalid
     else

@@ -15,8 +15,14 @@ RSpec.describe Ticker, type: :model do
   end
 
   it 'reject changes after manual set price' do
-    ticker.fixed_until = Time.current + 10.minutes
+    ticker.update fixed_until: Time.current + 10.minutes
     ticker.price = 100
     expect { ticker.save! }.to raise_error(ActiveRecord::RecordInvalid)
+  end
+
+  it 'accept changes when date set at past' do
+    ticker.fixed_until = Time.current - 10.minutes
+    ticker.price = 110
+    expect(ticker.price).to eq(Money.new(110_00, 'RUB'))
   end
 end

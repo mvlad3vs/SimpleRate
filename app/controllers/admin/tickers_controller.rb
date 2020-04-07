@@ -11,19 +11,22 @@ class Admin::TickersController < ApplicationController
 
   def update
     @ticker = Ticker.find(params[:id])
-    @ticker.price = ticker_params[:price]
-    @ticker.fixed_until = ticker_params[:fixed_until]
-    if @ticker.save
+    if @ticker.update ticker_params
       redirect_to admin_index_path, notice: 'Ticker was successfully updated.'
     else
-      render :index
+      render :index, notice: @ticker.errors.full_messages.join('\n')
     end
+  end
+
+  def show
+    @ticker = Ticker.find params[:id]
+    render :index
   end
 
 
   private
 
   def ticker_params
-    params.fetch(:ticker, [:price, :fixed_until])
+    params.require(:ticker).permit(:price, :fixed_until)
   end
 end

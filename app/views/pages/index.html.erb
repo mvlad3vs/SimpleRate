@@ -1,7 +1,10 @@
 <% if @ticker %>
 
   <h1 class="cover-heading" id="rate"><%= @ticker.price %></h1>
-  <h2 class="cover-heading" ><%= @ticker.pair %></h2>
+  <h2 class="cover-heading"><%= @ticker.pair %></h2>
+  <% if @ticker.fixed_until %>
+    <h4 class="cover-heading">Fixed until <%= @ticker.fixed_until %></h4>
+  <% end %>
 <% else %>
   <h1 class="cover-heading">No rate</h1>
 <% end %>
