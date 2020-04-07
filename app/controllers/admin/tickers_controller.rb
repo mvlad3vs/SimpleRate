@@ -14,7 +14,8 @@ class Admin::TickersController < ApplicationController
     if @ticker.update ticker_params
       redirect_to admin_index_path, notice: 'Ticker was successfully updated.'
     else
-      render :index, notice: @ticker.errors.full_messages.join('\n')
+      flash[:errors] = @ticker.errors.full_messages.join('\n')
+      render :index
     end
   end
 

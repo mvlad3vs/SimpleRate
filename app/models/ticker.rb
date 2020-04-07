@@ -5,8 +5,9 @@ class Ticker < ApplicationRecord
                greater_than_or_equal_to: 0
            }
 
-  validate :price_not_fixed, if: :fixed_until_was
+  validate :price_available_to_change, if: :fixed_until
   before_save :broadcast_changes, if: :price_cents_changed?
+  before_save :reset_fixed_timestamp
 
   def pair
     "#{base_currency}/#{quote_currency}"
@@ -15,11 +16,14 @@ class Ticker < ApplicationRecord
 
   private
 
-  def price_not_fixed
-    if fixed_until > Time.current
-      self.price_cents = price_cents_was
+  def price_available_to_change
+    if fixed_until_was != nil and fixed_until > Time.current
       errors.add :price, :invalid
-    else
+    end
+  end
+
+  def reset_fixed_timestamp
+    if fixed_until and not fixed_until_changed? and fixed_until < Time.current
       self.fixed_until = nil
     end
   end
