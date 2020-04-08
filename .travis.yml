@@ -6,3 +6,5 @@ before_install:
   - gem install bundler
 before_script:
   - bundle exec rake db:setup
+script:
+  — bundle exec rspec
