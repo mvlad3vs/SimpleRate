@@ -2,3 +2,5 @@ language: ruby
 services:
   - postgresql
   - redis-server
+before_script:
+  - psql -c 'create database SimpleRate_test;' -U postgres
